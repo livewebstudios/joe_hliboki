@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# CONFIRM WITH JOE: update domain from joehliboki.com placeholder before go-live
+Sitemap: https://joehliboki.com/sitemap.xml
