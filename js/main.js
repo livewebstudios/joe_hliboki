@@ -49,4 +49,34 @@
       el.classList.add('visible');
     });
   }
+
+  /* ----- Home header: transparent over the movie at the top,
+     solid sticky bar once scrolling starts ----- */
+  if (document.body.classList.contains('home')) {
+    var onScroll = function () {
+      document.body.classList.toggle('scrolled', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* ----- Hero background video -----
+     Attributes (autoplay muted loop playsinline) handle the
+     common case. This is a defensive nudge for browsers that
+     stall muted autoplay. Skipped when the visitor asks for
+     reduced motion, where the CSS hides the video entirely. */
+  var reduce = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var heroVideo = document.querySelector('.hero-video');
+
+  if (heroVideo && !reduce) {
+    var playHero = function () {
+      var p = heroVideo.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(function () { /* autoplay blocked; static frame is fine */ });
+      }
+    };
+    playHero();
+    heroVideo.addEventListener('canplay', playHero, { once: true });
+  }
 })();

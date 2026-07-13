@@ -1,0 +1,295 @@
+/* ============================================================
+   JOE HLIBOKI - Design Enrichment layer
+   Loaded AFTER style.css. Texture, background motifs, and
+   scale refinements only. No structural or copy changes.
+
+   The system: ONE motif (the ascent line with a brass
+   arrowhead, same language as the inline illustrations)
+   reused at different scales, plus two honest print-shop
+   textures (paper grain, halftone whisper). Everything is
+   an inline SVG/gradient data-URI: zero extra requests,
+   a few KB total, version-controls cleanly.
+
+   TUNING GUIDE FOR JON:
+   - Motif visibility: edit stroke-opacity inside the two
+     data-URIs below (--motif-sky, --motif-cream).
+   - Grain intensity: last row of the feColorMatrix in
+     --grain ("0.05" = 5% max alpha). 0 kills it.
+   - Halftone dots: the rgba alpha in .band-ink /
+     .site-footer background layers (0.05).
+   - Motif size/position per section: background-size /
+     background-position in each block below.
+   Built by Live Web Studios - livewebstudios.com
+   ============================================================ */
+
+/* ---------- Enrichment tokens ---------- */
+:root {
+  /* Paper grain: ink-toned fractal noise, max 5% alpha */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.078 0 0 0 0 0.153 0 0 0 0 0.239 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+
+  /* Ascent motif, sky stroke + brass arrowhead.
+     For cream and blue-wash surfaces. The line's tail fades
+     in via gradient so cropped edges read as a pen touching
+     down, never a hard cut. */
+  --motif-sky: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 620'%3E%3Cdefs%3E%3ClinearGradient id='f' gradientUnits='userSpaceOnUse' x1='-30' y1='0' x2='852' y2='0'%3E%3Cstop offset='0' stop-color='%23A9C4E4' stop-opacity='0'/%3E%3Cstop offset='0.4' stop-color='%23A9C4E4' stop-opacity='0.5'/%3E%3Cstop offset='1' stop-color='%23A9C4E4' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='none' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='url(%23f)' d='M-30 600C150 560 300 500 440 410 580 320 700 240 852 138'/%3E%3Cpath stroke='%23B0742C' stroke-opacity='0.4' d='M815 101l43 22-17 40'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* Ascent motif, cream stroke + brass arrowhead.
+     For the dark ink bands and footer. */
+  --motif-cream: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 620'%3E%3Cdefs%3E%3ClinearGradient id='f' gradientUnits='userSpaceOnUse' x1='-30' y1='0' x2='852' y2='0'%3E%3Cstop offset='0' stop-color='%23FAF7F1' stop-opacity='0'/%3E%3Cstop offset='0.4' stop-color='%23FAF7F1' stop-opacity='0.1'/%3E%3Cstop offset='1' stop-color='%23FAF7F1' stop-opacity='0.1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='none' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='url(%23f)' d='M-30 600C150 560 300 500 440 410 580 320 700 240 852 138'/%3E%3Cpath stroke='%23B0742C' stroke-opacity='0.5' d='M815 101l43 22-17 40'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ---------- 1. The paper feels like paper ---------- */
+/* Grain rides on the body cream; sections with their own
+   background add it back in their own stack below. */
+body {
+  background-image: var(--grain);
+}
+
+/* ---------- 2. Hero: watercolor horizon + line echo ---------- */
+/* Three stacked layers, back to front:
+   1) ascent line motif, echoing the illustration's own path
+   2) watercolor sky + mountain, filling the open space above
+      and behind the figure (the summit it climbs toward)
+   3) radial wash grounding the illo side
+   The watercolor sits to the right so hero copy contrast on the
+   left is untouched. Tune position/size in the two media blocks. */
+.hero {
+  background-image:
+    var(--motif-sky),
+    url("../images/hero-watercolor.svg"),
+    radial-gradient(
+      ellipse 640px 420px at 82% 42%,
+      color-mix(in srgb, var(--blue-wash) 55%, transparent),
+      transparent 70%
+    );
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: right -220px bottom -300px, right -40px top 10px, center;
+  background-size: 1150px auto, 660px auto, auto;
+}
+
+@media (min-width: 900px) {
+  .hero {
+    background-position: right -220px bottom -300px, right -20px top -78px, center;
+    background-size: 1150px auto, 780px auto, auto;
+  }
+}
+
+/* ---------- 3. Blue-wash bands: depth, not flatness ---------- */
+/* The motif peeks in from the band's top-right corner as a
+   quiet rising tail. Cropped so it never crosses the centered
+   content column or shows its arrowhead here. */
+.band {
+  background-image:
+    var(--motif-sky),
+    var(--grain),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--blue-wash) 86%, white) 0%,
+      var(--blue-wash) 52%,
+      color-mix(in srgb, var(--blue-wash) 92%, var(--sky)) 100%
+    );
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-position: right -420px top -380px, 0 0, center;
+  background-size: 900px auto, 180px 180px, cover;
+}
+
+/* ---------- 4. Ink bands + footer: pressed, not painted ---------- */
+/* Halftone whisper (like it came off a press) + one large
+   ascent line rising through the dark. The brass arrowhead
+   is the single warm moment per band. */
+.band-ink,
+.site-footer {
+  background-image:
+    var(--motif-cream),
+    radial-gradient(
+      circle,
+      rgba(250, 247, 241, 0.035) 1.1px,
+      transparent 1.6px
+    ),
+    var(--grain);
+  background-repeat: no-repeat, repeat, repeat;
+  background-position: right -160px bottom -180px, 0 0, 0 0;
+  background-size: 1050px auto, 22px 22px, 180px 180px;
+  background-color: var(--ink);
+}
+
+/* Footer: motif tucked lower so link columns stay quiet */
+.site-footer {
+  background-position: right -200px bottom -320px, 0 0, 0 0;
+}
+
+/* ---------- 5. Quote band ---------- */
+/* Deliberately clean: the oversized serif quote IS the
+   design moment. Scale bump lives in section 7. A motif here
+   read as a stray mark beside the type, so it was cut. */
+
+/* ---------- 6. Cards ---------- */
+/* Left untouched on purpose. The spot illustrations and brass
+   link arrows already carry the cards; a corner watermark at
+   card scale rendered as sub-pixel noise. Restraint won. */
+
+/* ---------- 6a. Centered sections center their buttons ---------- */
+/* The book band uses .center (text-align) but its flex .btn-row
+   wasn't centered. This aligns the CTA pair under the copy. */
+.center .btn-row {
+  justify-content: center;
+}
+
+/* ---------- 6c. About-page pull-quote inside prose ---------- */
+/* Breaks the bio wall of text. Sits in the narrow prose column,
+   so a touch smaller than a full band pull-quote, with air above
+   and below and a brand hairline lead-in. */
+.prose .pull-quote {
+  margin: 0.7em 0 0.9em;
+  padding-left: 20px;
+  border-left: 3px solid var(--sky);
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+@media (min-width: 900px) {
+  .prose .pull-quote {
+    font-size: 27px;
+  }
+}
+
+/* ---------- 6d. Book product shots (Higgsfield cutouts) ---------- */
+/* Transparent-background book renders. Drop-shadow lifts them off
+   whatever band they sit on. Sized by width; height stays natural. */
+.book-shot {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 20px 34px color-mix(in srgb, var(--ink) 26%, transparent));
+}
+
+.book-shot-sm {
+  max-width: 230px;
+}
+
+/* Flat book at the foot of the footer's left column. Extra shadow
+   because the dark cover would otherwise melt into the navy footer. */
+.footer-book {
+  display: block;
+  width: 210px;
+  max-width: 70%;
+  height: auto;
+  margin: 28px 0 0;
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.55));
+}
+
+/* ---------- 6b. Portrait of Joe ---------- */
+/* Fills the 4:5 frame the placeholder reserved. object-fit: cover
+   crops any delivered ratio cleanly; the soft shadow lifts it off
+   the cream the same way the cards sit above the page. */
+.portrait {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-soft);
+}
+
+/* About story: pull the portrait to the top of the column, lined up
+   with the "I graduated..." paragraph rather than vertically centered. */
+@media (min-width: 900px) {
+  .split-aside.portrait-aside {
+    align-self: start;
+    margin-top: 2.5rem;
+  }
+}
+
+/* ---------- 6e. Growth image in dark bands (Higgsfield) ---------- */
+/* Two-column band: abstract upward-motion render on the LEFT, the
+   section's copy on the RIGHT. Stacks on mobile (image first).
+   Rounded corners + hairline grey border per spec. One per page,
+   each a distinct generation. */
+.band-ink .growth-split {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .band-ink .growth-split {
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+    gap: 56px;
+  }
+}
+
+.growth-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid #8a94a3;
+}
+
+/* Copy stays left-aligned even on the former centered CTA bands */
+.growth-body {
+  text-align: left;
+}
+
+.growth-body .section-head {
+  margin-bottom: 20px;
+}
+
+.growth-body .btn-row {
+  justify-content: flex-start;
+}
+
+/* ---------- 7. Scale refinements (foreground confidence) ---------- */
+/* The illustrations and editorial moments were reading
+   timid relative to the whitespace around them. */
+.illo-small {
+  max-width: 280px;
+}
+
+.divider svg {
+  width: 76px;
+  height: 33px;
+}
+
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1.08fr 0.92fr;
+  }
+
+  .hero-illo {
+    max-width: 560px;
+  }
+
+  .quote-band .pull-quote {
+    font-size: 48px;
+    max-width: 22ch;
+  }
+}
+
+/* ---------- 8. Mobile: quieter, lighter ---------- */
+/* Smaller motifs so the line work stays an accent, not a fence. */
+@media (max-width: 899px) {
+  /* Three layers (motif, watercolor, radial) — order matches the
+     base rule. The watercolor sits high behind the centered figure
+     and fades out well above the stacked body copy. */
+  .hero {
+    background-size: 720px auto, 470px auto, auto;
+    background-position:
+      right -180px bottom -140px,
+      center top -46px,
+      center;
+  }
+
+  .band {
+    background-size: 620px auto, 180px 180px, cover;
+    background-position: right -320px top -280px, 0 0, center;
+  }
+
+  .band-ink,
+  .site-footer {
+    background-size: 700px auto, 22px 22px, 180px 180px;
+    background-position: right -200px bottom -160px, 0 0, 0 0;
+  }
+}
