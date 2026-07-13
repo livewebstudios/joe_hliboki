@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Hero watercolor sky + mountain — Joe Hliboki
+  Decorative ambient background for the hero right column. Fills the
+  open space above the walking figure with a soft blue horizon the
+  figure appears to climb toward. Pure SVG: no raster, edits cleanly.
+
+  A left/right edge mask dissolves the art into the cream page so it
+  never shows a hard box seam, wherever it's positioned.
+
+  TUNING FOR JON:
+  - Overall subtlety: the master opacity on <g id="art"> (0.62).
+  - Where it dissolves left/right: the #edge gradient stops.
+  - Watercolor bleed: feDisplacementMap "scale" in #watercolor.
+  - Colours are the site's own: sky #A9C4E4, a mid brand blue, wash.
+  Built by Live Web Studios - livewebstudios.com
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 620" preserveAspectRatio="xMidYMax meet" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A9C4E4" stop-opacity="0.5"/>
+      <stop offset="0.44" stop-color="#C6D8ED" stop-opacity="0.22"/>
+      <stop offset="0.74" stop-color="#E7EEF7" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="mtnFar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FB0D6" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#8FB0D6" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="mtnNear" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5E86BC" stop-opacity="0.44"/>
+      <stop offset="1" stop-color="#5E86BC" stop-opacity="0.06"/>
+    </linearGradient>
+
+    <!-- Horizontal dissolve: hidden at the left so it melts into the
+         page, held across the middle, gently eased at the right. -->
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.34" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="0.86" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.5"/>
+    </linearGradient>
+    <mask id="fade">
+      <rect x="0" y="0" width="760" height="620" fill="url(#edge)"/>
+    </mask>
+
+    <!-- Watercolor: displace edges with soft noise, blur to bleed,
+         then clip a faint darker grain inside for pigment. -->
+    <filter id="watercolor" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="4" seed="8" result="turb"/>
+      <feDisplacementMap in="SourceGraphic" in2="turb" scale="26" xChannelSelector="R" yChannelSelector="G" result="disp"/>
+      <feGaussianBlur in="disp" stdDeviation="2.4" result="soft"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="3" result="grain"/>
+      <feColorMatrix in="grain" type="matrix"
+        values="0 0 0 0 0.05
+                0 0 0 0 0.10
+                0 0 0 0 0.18
+                0 0 0 0.05 0" result="grainC"/>
+      <feComposite in="grainC" in2="soft" operator="in" result="grainClip"/>
+      <feMerge>
+        <feMergeNode in="soft"/>
+        <feMergeNode in="grainClip"/>
+      </feMerge>
+    </filter>
+
+    <!-- Softer filter for the broad sky wash: bleed, no grain. -->
+    <filter id="wash" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="3" seed="4" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="20" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="6" result="b"/>
+    </filter>
+  </defs>
+
+  <g id="art" mask="url(#fade)" opacity="0.62">
+    <!-- Sky wash: fills the open upper area -->
+    <g filter="url(#wash)">
+      <rect x="-20" y="-20" width="800" height="430" fill="url(#sky)"/>
+    </g>
+
+    <!-- Distant range: low, soft, wide -->
+    <g filter="url(#watercolor)" opacity="0.9">
+      <path fill="url(#mtnFar)"
+        d="M-20 360 C 90 338 170 352 250 344 C 340 335 400 300 470 316 C 540 332 600 356 680 340 C 720 332 760 340 800 348 L800 620 L-20 620 Z"/>
+    </g>
+
+    <!-- Near peak: taller toward the right, the summit the figure climbs to -->
+    <g filter="url(#watercolor)" opacity="0.85">
+      <path fill="url(#mtnNear)"
+        d="M-20 470 C 110 452 210 470 300 452 C 380 436 430 388 500 356 C 548 334 588 372 650 396 C 700 415 760 420 800 428 L800 620 L-20 620 Z"/>
+    </g>
+  </g>
+</svg>

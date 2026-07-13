@@ -12,3 +12,9 @@ $RECYCLE.BIN/
 # Claude Code
 *.log
 .claude/
+
+# Working source material + internal planning (not shipped to the repo)
+source-images/
+26_07_12_design_enrichment_handoff.md
+DESIGN-REVIEW.md
+NEEDS-ASSETS.md

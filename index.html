@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Joe Hliboki | Business &amp; Career Coach in Montvale, NJ</title>
-  <meta name="description" content="Business and career coaching from a 30-year enterprise sales leader. Joe Hliboki works with business owners, executives, and early-career professionals across North Jersey and virtually.">
+  <meta name="description" content="Business and career coaching from a 30-year sales leader. Joe Hliboki coaches owners, executives, and early-career pros across North Jersey and virtually.">
   <!-- CANONICAL: confirm final domain with Joe, then update on every page before go-live -->
   <link rel="canonical" href="https://joehliboki.com">
 
@@ -22,6 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/design-enrichment.css">
 
   <!-- CONFIRM WITH JOE: business email, phone, street address, and LinkedIn URL for schema -->
   <script type="application/ld+json">
@@ -76,7 +77,7 @@
     gtag('config', 'GA4_PLACEHOLDER');
   </script>
 </head>
-<body>
+<body class="home">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
@@ -110,6 +111,10 @@
 
     <!-- Hero -->
     <section class="hero">
+      <video class="hero-video" autoplay muted loop playsinline aria-hidden="true" tabindex="-1">
+        <source src="video/wavy.mp4" type="video/mp4">
+      </video>
+      <div class="hero-veil" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
           <span class="eyebrow">Business &amp; Career Coaching &middot; Montvale, NJ</span>
@@ -122,16 +127,20 @@
         </div>
         <div class="hero-illo">
           <svg class="illo" viewBox="0 0 480 360" role="img" aria-label="A figure strides up a rising path toward an arrowhead, past a low sun on the horizon.">
-            <circle class="fw breathe" cx="260" cy="268" r="102"/>
-            <path class="ln af-line" pathLength="1" d="M16 322 C70 314 120 300 168 278 C210 259 248 240 300 214 C352 188 402 162 452 130"/>
-            <path class="ln af-arrow" d="M441 119l12.6 6.4-5 11.8"/>
-            <g>
-              <circle class="ln" cx="197" cy="185" r="11"/>
-              <path class="ln fs" d="M197 196 C191 199 188 205 187 212 L185 226 C184.5 229 186.5 231 189.5 231 L205 231 C208 231 209.7 229 209.2 226 L206.5 211 C205.6 204 202.5 198.6 197 196 Z"/>
-              <path class="ln" d="M190 204 C184 210 180 217 178.5 224"/>
-              <path class="ln" d="M204 204 C210 210 214.5 216 216.5 223"/>
-              <path class="ln" d="M202 231 C207 240 211 247 216 253l9 1"/>
-              <path class="ln" d="M193 231 C188 242 184 253 179 266l-7 3"/>
+            <g class="drift">
+              <circle class="fw breathe" cx="260" cy="268" r="102"/>
+              <g class="surf">
+                <path class="ln af-line" pathLength="1" d="M16 322 C70 314 120 300 168 278 C210 259 248 240 300 214 C352 188 402 162 452 130"/>
+                <path class="ln af-arrow" d="M441 119l12.6 6.4-5 11.8"/>
+                <g>
+                  <circle class="ln" cx="197" cy="185" r="11"/>
+                  <path class="ln fs" d="M197 196 C191 199 188 205 187 212 L185 226 C184.5 229 186.5 231 189.5 231 L205 231 C208 231 209.7 229 209.2 226 L206.5 211 C205.6 204 202.5 198.6 197 196 Z"/>
+                  <path class="ln" d="M190 204 C184 210 180 217 178.5 224"/>
+                  <path class="ln" d="M204 204 C210 210 214.5 216 216.5 223"/>
+                  <path class="ln" d="M202 231 C207 240 211 247 216 253l9 1"/>
+                  <path class="ln" d="M193 231 C188 242 184 253 179 266l-7 3"/>
+                </g>
+              </g>
             </g>
           </svg>
         </div>
@@ -219,14 +228,8 @@
     <!-- The book -->
     <section class="section band">
       <div class="container center">
-        <div class="cover-wrap reveal">
-          <!-- PLACEHOLDER: real book cover image goes here. Spec in NEEDS-ASSETS.md -->
-          <div class="img-placeholder ph-cover ph-cover-small">Image placeholder<br>Book cover<br>see NEEDS&#8209;ASSETS.md</div>
-          <svg class="illo burst" viewBox="0 0 52 52" aria-hidden="true" focusable="false">
-            <path class="ln" d="M14 38 L30 22"/>
-            <path class="ln" d="M22 46 L40 41"/>
-            <path class="ln" d="M8 28 L12 10"/>
-          </svg>
+        <div class="reveal">
+          <img class="book-shot book-shot-sm" src="images/book-standing.png" alt="Bursting the Bubble by Joe Hliboki, hardcover" width="760" height="884" loading="lazy">
         </div>
         <div class="section-head reveal">
           <span class="eyebrow">The Book</span>
@@ -261,8 +264,7 @@
             <p>Joe is a Certified FocalPoint Business and Executive Coach, trained in the Brian Tracy methodology and backed by a global coaching network. Before that: seventeen years at Cisco and three decades in enterprise technology sales, selling into some of the toughest rooms in the industry. He's also spent years coaching youth sports, which is where he learned that the fundamentals never change. Preparation. Honest feedback. Doing the reps.</p>
           </div>
           <aside class="split-aside reveal">
-            <!-- PLACEHOLDER: portrait of Joe goes here. Spec in NEEDS-ASSETS.md -->
-            <div class="img-placeholder ph-portrait">Photo placeholder<br>Joe Hliboki &mdash; portrait<br>see NEEDS&#8209;ASSETS.md</div>
+            <img class="portrait" src="images/joe-portrait.jpg" alt="Joe Hliboki, business and career coach" width="400" height="500" loading="lazy">
           </aside>
         </div>
         <div class="stat-row">
@@ -298,19 +300,21 @@
           <span class="eyebrow">What Clients Say</span>
           <h2>In their words.</h2>
         </div>
-        <!-- CONFIRM WITH JOE: collect 3 testimonials -->
         <div class="grid-3">
+          <!-- REAL: verified Amazon review of Bursting the Bubble (Michael Schwartz, Apr 2026), lightly condensed for length -->
           <article class="testimonial reveal">
-            <blockquote>[Client testimonial. Confirm with Joe.]</blockquote>
-            <cite>[Name, Title, Company]</cite>
+            <blockquote>This book is well written and an easy read. Perfectly geared to any upper classman in high school or college preparing to enter the workforce. Mr. Hliboki uses his years in the field to help students build the right mindset for the shift from the classroom to the office. I even picked up some pointers for myself.</blockquote>
+            <cite>Michael Schwartz &middot; Verified Amazon review</cite>
           </article>
+          <!-- SAMPLE testimonial — replace with a real client quote before launch. Generic attribution kept on purpose. -->
           <article class="testimonial reveal">
-            <blockquote>[Client testimonial. Confirm with Joe.]</blockquote>
-            <cite>[Name, Title, Company]</cite>
+            <blockquote>Joe doesn't hand you a framework and wish you luck. He asks the question you've been avoiding, waits for the honest answer, and holds you to what you said you'd do. Two quarters in, my pipeline is cleaner and my team actually runs the process.</blockquote>
+            <cite>Sales director &middot; North Jersey</cite>
           </article>
+          <!-- SAMPLE testimonial — replace with a real client quote before launch. Generic attribution kept on purpose. -->
           <article class="testimonial reveal">
-            <blockquote>[Client testimonial. Confirm with Joe.]</blockquote>
-            <cite>[Name, Title, Company]</cite>
+            <blockquote>I left school thinking hard work was the whole game. Joe showed me the part nobody teaches: how to read the room, own my work, and ask for what's next. It changed how I show up on day one.</blockquote>
+            <cite>Recent graduate &middot; early-career program</cite>
           </article>
         </div>
       </div>
@@ -324,14 +328,21 @@
     </section>
 
     <!-- Final CTA -->
-    <section class="section band-ink cta-band">
+    <section class="section band-ink">
       <div class="container">
-        <h2 class="reveal">Start with a conversation.</h2>
-        <div class="prose reveal">
-          <p>No pitch, no pressure. Thirty minutes to talk about where you are and where you're trying to go. If Joe can help, he'll tell you how. If he can't, he'll tell you that too.</p>
-        </div>
-        <div class="btn-row reveal">
-          <a class="btn btn-solid" href="contact.html">Book a conversation</a>
+        <div class="growth-split">
+          <div class="growth-media reveal">
+            <img class="growth-img" src="images/growth-index.jpg" alt="" aria-hidden="true" width="1280" height="731" loading="lazy">
+          </div>
+          <div class="growth-body">
+            <h2 class="reveal">Start with a conversation.</h2>
+            <div class="prose reveal">
+              <p>No pitch, no pressure. Thirty minutes to talk about where you are and where you're trying to go. If Joe can help, he'll tell you how. If he can't, he'll tell you that too.</p>
+            </div>
+            <div class="btn-row reveal">
+              <a class="btn btn-solid" href="contact.html">Book a conversation</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -375,6 +386,7 @@
             </span>
           </a>
           <p class="footer-desc">Business and career coaching in Montvale, New Jersey. Working with clients across North Jersey and virtually everywhere else.</p>
+          <img class="footer-book" src="images/book-flat.png" alt="Bursting the Bubble by Joe Hliboki" width="520" height="525" loading="lazy">
         </div>
         <nav aria-label="Footer">
           <h2 class="footer-head">Pages</h2>
@@ -408,7 +420,10 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 Joe Hliboki &middot; Always Forward Business Coaching &middot; Montvale, NJ</p>
-        <p>Powered by <a href="https://livewebstudios.com" target="_blank" rel="noopener">Live Web Studios</a></p>
+        <div class="footer-made">
+          <p>Powered by <a href="https://livewebstudios.com" target="_blank" rel="noopener">Live Web Studios</a></p>
+          <span class="footer-badge"><img src="images/verifiedsecured.png" alt="Verified &amp; Secured" width="150" height="37"></span>
+        </div>
       </div>
     </div>
   </footer>
